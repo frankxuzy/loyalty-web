@@ -15,6 +15,7 @@ router.post('/login', login, token.issue)
 
 router.get('/stats', token.decode, (req, res) => {
   if (req.user.role === 'admin') {
+    // get visitors info and sent to client side
     db.getVisits()
       .then(users => {
         res.json(users)
@@ -29,6 +30,7 @@ router.get('/stats', token.decode, (req, res) => {
 
 router.get('/users', token.decode, (req, res) => {
   if (req.user.role === 'admin') {
+    // get admin profile and sent to client side
     db.getUsers()
       .then(users => {
         res.json(users)
@@ -51,6 +53,7 @@ router.get('/profile', token.decode, (req, res) => {
 })
 
 function login (req, res, next) {
+  // get user info in users table
   db.getUserByName(req.body.username)
     .then(user => {
       if (!user) {
@@ -60,9 +63,11 @@ function login (req, res, next) {
       }
     })
     .then(user => {
+      // verdict if hashed password match the hash in users table
       return hash.verifyUser(user.hash, req.body.password)
     })
     .then(isValid => {
+      // if valid, send token to client side
       return isValid ? next() : new Error('NO_Authority')
     })
     .catch((err) => {
