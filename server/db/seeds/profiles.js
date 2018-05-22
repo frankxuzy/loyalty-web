@@ -21,7 +21,7 @@ exports.seed = function (knex, Promise) {
           photo_url: 'https://avatars2.githubusercontent.com/u/32422558?s=400&v=4',
           email: 'tori@kauri.co.nz',
           expiry_date: '31/12/2020',
-          membership_type: 'member',
+          membership_type: 'admin',
           membership_number: '0000124'
         },
         {

@@ -7,7 +7,7 @@ exports.seed = function (knex, Promise) {
       // Inserts seed entries
       return knex('users').insert([
         {id: 1, hash: generate('zoel'), username: 'zoel', role: 'admin'},
-        {id: 2, hash: generate('tori'), username: 'tori', role: 'member'},
+        {id: 2, hash: generate('tori'), username: 'tori', role: 'admin'},
         {id: 3, hash: generate('frank'), username: 'frank', role: 'member'},
         {id: 4, hash: generate('charlie'), username: 'charlie', role: 'member'},
         {id: 5, hash: generate('christiana '), username: 'christiana', role: 'member'},
