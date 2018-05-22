@@ -7,6 +7,7 @@ module.exports = {
   decode
 }
 
+// send token to client side
 function issue (req, res) {
   db.getUserByName(req.body.username)
     .then(user => {
@@ -18,6 +19,7 @@ function issue (req, res) {
     })
 }
 
+// create jwt token
 function createToken (user, secret) {
   return jwt.sign({
     id: user.id,
@@ -28,6 +30,7 @@ function createToken (user, secret) {
   })
 }
 
+// verify if token in req match the server side created token
 function decode (req, res, next) {
   verifyJwt({secret: getSecret})(req, res, next)
 }

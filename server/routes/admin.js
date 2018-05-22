@@ -23,7 +23,7 @@ router.get('/stats', token.decode, (req, res) => {
         res.status(500).send(err.message)
       })
   } else {
-    noAuthority(res)
+    noAuthority()
   }
 })
 
@@ -37,7 +37,7 @@ router.get('/users', token.decode, (req, res) => {
         res.status(500).send(err.message)
       })
   } else {
-    noAuthority(res)
+    noAuthority()
   }
 })
 
@@ -79,7 +79,9 @@ function register (req, res, next) {
         return res.status(400).json({message: 'User exists'})
       }
       const {username, name, password} = req.body
+      // create new user in users and profiles table
       db.createUser(username, name, password)
+      // send token to client side
         .then(() => next())
     })
     .catch(err => {
